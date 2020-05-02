@@ -2,7 +2,7 @@ import React from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { SignInWithGoogle } from '../../firebase/firebase.utils';
-import './signin.styles.scss';
+import './sign-in.styles.scss';
 
 class SignIn extends React.Component {
     constructor (props) {
@@ -19,6 +19,7 @@ class SignIn extends React.Component {
 
     handleChange = event => {
         const { name,value } = event.target;
+
         this.setState({ [name]: value });
     }
 
