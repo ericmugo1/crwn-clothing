@@ -9,15 +9,15 @@ height: 350px;
 align-items: center;
 position: relative;
 
-&:hover {
-.image {
-opacity: 0.8;
-}
+    &:hover {
+    .image {
+    opacity: 0.8;
+    }
 
-.custom-button {
-opacity: 0.85;
-display: flex;
-}
+    .custom-button {
+    opacity: 0.85;
+    display: flex;
+    }
 }
 `;
 
