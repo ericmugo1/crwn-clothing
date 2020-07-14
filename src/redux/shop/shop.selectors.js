@@ -18,11 +18,6 @@ export const collectionsForPreviewSelector = createSelector(
   collections => collections ? Object.keys(collections).map(key => collections[key]) : []
 );
 
-export const isFetchingCollectionsSelector = createSelector(
-  [shopSelector],
-  shop => shop.isFetchingData
-);
-
 export const haveCollectionsLoadedSelector = createSelector(
   [shopSelector],
   shop => !!shop.collections
