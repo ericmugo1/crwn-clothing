@@ -7,7 +7,7 @@ export const shopCollectionsSelector = createSelector(
   shop => shop.collections
 );
 
-export const collectionSelector = collectionUrlParam =>
+export const collectionCategorySelector = collectionUrlParam =>
   createSelector(
     [shopCollectionsSelector],
     collections => collections ? collections[collectionUrlParam] : null
@@ -16,4 +16,14 @@ export const collectionSelector = collectionUrlParam =>
 export const collectionsForPreviewSelector = createSelector(
   [shopCollectionsSelector],
   collections => collections ? Object.keys(collections).map(key => collections[key]) : []
+);
+
+export const isFetchingCollectionsSelector = createSelector(
+  [shopSelector],
+  shop => shop.isFetchingData
+);
+
+export const haveCollectionsLoadedSelector = createSelector(
+  [shopSelector],
+  shop => !!shop.collections
 );
