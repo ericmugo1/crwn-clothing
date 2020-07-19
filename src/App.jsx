@@ -12,16 +12,13 @@ import { checkUserSession } from './redux/user/user.actions';
 import "./App.css";
 
 class App extends React.Component {
-  unsubsrcribeFromAuth = null;
 
   componentDidMount() {
     const { checkUserSession } = this.props;
     checkUserSession();
-
   }
 
   componentWillUnmount() {
-    this.unsubsrcribeFromAuth();
   }
 
   render() {
