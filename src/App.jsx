@@ -5,33 +5,19 @@ import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth,createUserProfile } from './firebase/firebase.utils';
 import { connect } from "react-redux";
 import { createStructuredSelector } from 'reselect';
-import { setCurrentUser } from "./redux/user/user.actions";
 import { currentUserSelector } from "./redux/user/user.selectors";
+import { checkUserSession } from './redux/user/user.actions';
 import "./App.css";
 
 class App extends React.Component {
   unsubsrcribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-    this.unsubsrcribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
+    const { checkUserSession } = this.props;
+    checkUserSession();
 
-        const userRef = await createUserProfile(userAuth);
-        userRef.onSnapshot(snapShot => {
-
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        })
-      }
-
-      setCurrentUser(userAuth);
-    });
   }
 
   componentWillUnmount() {
@@ -39,6 +25,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     return (
       <div>
         <Header />
@@ -47,7 +34,7 @@ class App extends React.Component {
           <Route path='/shop' component={ ShopPage } />
           <Route exact path='/checkout' component={ CheckoutPage } />
           <Route exact path='/signin' render={ () =>
-            this.props.currentUser ?
+            currentUser ?
               (<Redirect to='/' />) :
               (<SignInAndSignUpPage />) } />
         </Switch>
@@ -61,7 +48,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(
