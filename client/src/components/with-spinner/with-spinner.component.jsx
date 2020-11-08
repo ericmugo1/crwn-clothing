@@ -1,31 +1,9 @@
 import React from 'react';
-import {
-    AtomSpinnerOverlay,
-    AtomSpinnerContainer,
-    InnerSpinner,
-    SpinnerLine1,
-    SpinnerLine2,
-    SpinnerLine3,
-    SpinnerCircle
-} from "./with-spinner.styles";
+
+import Spinner from '../spinner/spinner.component';
 
 const withSpinner = WrappedComponent => ({ isLoading,...otherProps }) => {
-    return isLoading ? (
-        <AtomSpinnerOverlay>
-            <AtomSpinnerContainer>
-                <InnerSpinner>
-                    <SpinnerLine1 />
-                    <SpinnerLine2 />
-                    <SpinnerLine3 />
-                    <SpinnerCircle>
-                        &#9679;
-                </SpinnerCircle>
-                </InnerSpinner>
-            </AtomSpinnerContainer>
-        </AtomSpinnerOverlay>
-    ) : (
-            <WrappedComponent { ...otherProps } />
-        );
+    return isLoading ? <Spinner /> : <WrappedComponent { ...otherProps } />
 };
 
 export default withSpinner;
